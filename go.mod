@@ -1,4 +1,4 @@
-module github.com/marigold-dev/tezos-snapshot
+module github.com/mavryk-network/mavryk-snapshot
 
 go 1.20
 

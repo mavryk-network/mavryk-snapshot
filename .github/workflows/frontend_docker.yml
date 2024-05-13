@@ -31,7 +31,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push
-        id: docker_build_tezos-snapshot-web
+        id: docker_build_mavryk-snapshot-web
         uses: docker/build-push-action@v3
         with:
           context: ./frontend/
@@ -41,5 +41,5 @@ jobs:
           # Only push if on main branch
           push: ${{ github.ref == 'refs/heads/main' && github.event_name == 'push' }}
           tags: |
-            ghcr.io/marigold-dev/tezos-snapshot-web:latest
-            ghcr.io/marigold-dev/tezos-snapshot-web:${{ steps.vars.outputs.date }}-${{ steps.vars.outputs.sha_short }}
+            ghcr.io/mavryk-network/mavryk-snapshot-web:latest
+            ghcr.io/mavryk-network/mavryk-snapshot-web:${{ steps.vars.outputs.date }}-${{ steps.vars.outputs.sha_short }}

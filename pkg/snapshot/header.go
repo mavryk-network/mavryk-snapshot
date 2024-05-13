@@ -40,8 +40,8 @@ func (s *SnapshotHeader) SanitizeChainName() string {
 
 	chainName = strings.ToLower(chainName)
 
-	if chainName == "ithacanet" {
-		chainName = "ghostnet"
+	if chainName == "atlasnet" {
+		chainName = "basenet"
 	}
 
 	return chainName

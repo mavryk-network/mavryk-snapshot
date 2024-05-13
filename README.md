@@ -1,11 +1,11 @@
-# tezos-snapshot
+# mavryk-snapshot
 
-Services to create and provide Tezos nodes snapshots
+Services to create and provide Mavryk nodes snapshots
 
 We have two entry points for two services, the Photographer CronJob and the Web Server.
 ## Photographer Entrypoint
 
-Service to create Tezos nodes snapshots and upload them into Google Cloud Storage.
+Service to create Mavryk nodes snapshots and upload them into Google Cloud Storage.
 
 We from marigold use it as a CronJob in K8S that is triggered every day.
 
@@ -35,7 +35,7 @@ docker run photographer
 
 ## Server Entrypoint
 
-Service to server Tezos nodes snapshots from Google Cloud and expose them.
+Service to server Mavryk nodes snapshots from Google Cloud and expose them.
 
 We from marigold use it as a Web Service.
 
@@ -67,5 +67,5 @@ docker run server
 * **/** to return json content with all snapshots
 * **/mainnet/rolling** to return the last mainnet rolling snapshot
 * **/mainnet/full** to return the last mainnet full snapshot
-* **/ghostnet/rolling** to return the last testnet rolling snapshot
-* **/ghostnet/full** to return the last testnet full snapshot
+* **/basenet/rolling** to return the last testnet rolling snapshot
+* **/basenet/full** to return the last testnet full snapshot

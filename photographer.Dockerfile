@@ -11,7 +11,7 @@ COPY ./pkg ./pkg
 # https://github.com/remotemobprogramming/mob/issues/393
 RUN cd cmd/photographer && go build -ldflags "-linkmode 'external' -extldflags '-static'" -o /main
 
-FROM tezos/tezos:${VERSION}
+FROM mavrykdynamics/mavryk:${VERSION}
 COPY --from=builder /main ./
 
 USER tezos

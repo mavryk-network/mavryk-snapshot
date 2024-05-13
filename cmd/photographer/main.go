@@ -10,9 +10,9 @@ import (
 	"cloud.google.com/go/storage"
 	"github.com/go-co-op/gocron"
 	"github.com/joho/godotenv"
-	"github.com/marigold-dev/tezos-snapshot/pkg/snapshot"
-	"github.com/marigold-dev/tezos-snapshot/pkg/store"
-	"github.com/marigold-dev/tezos-snapshot/pkg/util"
+	"github.com/mavryk-network/mavryk-snapshot/pkg/snapshot"
+	"github.com/mavryk-network/mavryk-snapshot/pkg/store"
+	"github.com/mavryk-network/mavryk-snapshot/pkg/util"
 	"github.com/samber/lo"
 )
 
@@ -37,10 +37,10 @@ func task() {
 	maxMonths := util.GetEnvInt("MAX_MONTHS", 6)
 	network := strings.ToLower(os.Getenv("NETWORK"))
 	snapshotsPath := util.GetEnvString("SNAPSHOTS_PATH", "/var/run/tezos/snapshots")
-	octezNodepath := util.GetEnvString("OCTEZ_NODE_PATH", "/usr/local/bin/octez-node")
-	tezosPath := util.GetEnvString("TEZOS_PATH", "/var/run/tezos/node")
+	mavkitNodepath := util.GetEnvString("MAVKIT_NODE_PATH", "/usr/local/bin/mavkit-node")
+	mavrykPath := util.GetEnvString("MAVRYK_PATH", "/var/run/tezos/node")
 
-	snapshotExec := NewSnapshotExec(snapshotsPath, octezNodepath, tezosPath)
+	snapshotExec := NewSnapshotExec(snapshotsPath, mavkitNodepath, mavrykPath)
 
 	if bucketName == "" {
 		log.Fatalln("The BUCKET_NAME environment variable is empty.")
@@ -50,9 +50,9 @@ func task() {
 		log.Fatalln("The NETWORK environment variable is empty.")
 	}
 
-	// Usually for ghostnet, because it's link
-	if strings.Contains(network, "https://teztnets.xyz/") {
-		network = strings.Replace(network, "https://teztnets.xyz/", "", -1)
+	// Usually for basenet, because it's link
+	if strings.Contains(network, "https://testnets.mavryk.network/") {
+		network = strings.Replace(network, "https://testnets.mavryk.network/", "", -1)
 	}
 
 	client, err := storage.NewClient(ctx)

@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/marigold-dev/tezos-snapshot/pkg/snapshot"
+	"github.com/mavryk-network/mavryk-snapshot/pkg/snapshot"
 )
 
 type FileInfo struct {
@@ -19,8 +19,8 @@ type FileInfo struct {
 func getInfoFromfilename(filename string) *FileInfo {
 	chainName := strings.ToLower(strings.Split(strings.Split(filename, "-")[0], "_")[1])
 
-	if chainName == "ithacanet" {
-		chainName = "ghostnet"
+	if chainName == "atlasnet" {
+		chainName = "basenet"
 	}
 
 	historyMode := snapshot.HistoryModeType(snapshot.FULL)

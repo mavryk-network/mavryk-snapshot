@@ -1,4 +1,4 @@
-export type ArtifactType = 'tezos-snapshot' | 'tarball'
+export type ArtifactType = 'mavryk-snapshot' | 'tarball'
 export type HistoryModeType = 'rolling' | 'full' | 'archive'
 export type NetworkProtocolType = 'mainnet' | 'ithacanet' | string
 
@@ -15,7 +15,7 @@ export type Snapshot = {
   url: string
   filesize: string
   filesize_bytes: number
-  tezos_version: {
+  mavryk_version: {
     version: {
       additional_info: string
       major: number

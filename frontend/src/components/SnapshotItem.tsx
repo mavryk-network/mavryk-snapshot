@@ -9,7 +9,7 @@ import { useTheme } from '@mui/material/styles'
 
 const getNetworkName = (snapshot: Snapshot) => {
   const networkProtocol = (
-    snapshot.chain_name === 'ithacanet' ? 'ghostnet' : snapshot.chain_name
+    snapshot.chain_name === 'atlasnet' ? 'basenet' : snapshot.chain_name
   ).toUpperCase()
 
   return networkProtocol === snapshot.history_mode
@@ -116,7 +116,7 @@ const SnapshotItem = (props: { snapshot: Snapshot }) => {
           }}
           component="div"
         >
-          Tezos Version
+          Mavryk Version
         </Typography>
         <Typography
           style={{
@@ -126,8 +126,8 @@ const SnapshotItem = (props: { snapshot: Snapshot }) => {
           }}
           component="div"
         >
-          v{props.snapshot.tezos_version.version.major}.
-          {props.snapshot.tezos_version.version.minor}
+          v{props.snapshot.mavryk_version.version.major}.
+          {props.snapshot.mavryk_version.version.minor}
         </Typography>
       </CardContent>
 

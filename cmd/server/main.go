@@ -7,7 +7,7 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	"github.com/marigold-dev/tezos-snapshot/pkg/snapshot"
+	"github.com/mavryk-network/mavryk-snapshot/pkg/snapshot"
 	"github.com/patrickmn/go-cache"
 )
 
@@ -45,17 +45,10 @@ func main() {
 
 	e.GET("/mainnet", downloadableHandlerBuilder("mainnet"))
 	e.GET("/mainnet/:type", downloadableHandlerBuilder("mainnet"))
-	e.GET("/hangzhounet/:type", downloadableHandlerBuilder("hangzhounet"))
-	e.GET("/ghostnet/:type", downloadableHandlerBuilder("ghostnet"))
-	e.GET("/ithacanet/:type", downloadableHandlerBuilder("ithacanet"))
-	e.GET("/jakartanet/:type", downloadableHandlerBuilder("jakarta"))
-	e.GET("/kathmandunet/:type", downloadableHandlerBuilder("kathmandunet"))
-	e.GET("/limanet/:type", downloadableHandlerBuilder("limanet"))
-	e.GET("/mumbainet/:type", downloadableHandlerBuilder("mumbainet"))
-	e.GET("/nairobinet/:type", downloadableHandlerBuilder("nairobinet"))
-	e.GET("/oxfordnet/:type", downloadableHandlerBuilder("oxfordnet"))
+	e.GET("/basenet/:type", downloadableHandlerBuilder("basenet"))
+	e.GET("/atlasnet/:type", downloadableHandlerBuilder("atlasnet"))
 	e.GET("/", api)
-	e.GET("/tezos-snapshots.json", api)
+	e.GET("/mavryk-snapshots.json", api)
 	e.GET("/health", func(c echo.Context) error {
 		return c.String(http.StatusOK, "UP")
 	})
