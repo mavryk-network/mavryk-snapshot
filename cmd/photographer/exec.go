@@ -7,22 +7,22 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/marigold-dev/tezos-snapshot/pkg/snapshot"
+	"github.com/mavryk-network/mavryk-snapshot/pkg/snapshot"
 )
 
 type SnapshotExec struct {
-	snapshotsPath    string
-	octezNodeBinPath string
-	tezosPath        string
+	snapshotsPath     string
+	mavkitNodeBinPath string
+	mavrykPath        string
 }
 
-func NewSnapshotExec(snapshotsPath, octezNodePath, tezosPath string) *SnapshotExec {
-	return &SnapshotExec{snapshotsPath, octezNodePath, tezosPath}
+func NewSnapshotExec(snapshotsPath, mavkitNodePath, mavrykPath string) *SnapshotExec {
+	return &SnapshotExec{snapshotsPath, mavkitNodePath, mavrykPath}
 }
 
 func (s *SnapshotExec) CreateSnapshot(historyMode snapshot.HistoryModeType) {
 	log.Println("Creating snapshot.")
-	script := "mkdir -p " + s.snapshotsPath + " && cd " + s.snapshotsPath + " && " + s.octezNodeBinPath + " snapshot export --block head~10 --data-dir " + s.tezosPath + "/data"
+	script := "mkdir -p " + s.snapshotsPath + " && cd " + s.snapshotsPath + " && " + s.mavkitNodeBinPath + " snapshot export --block head~10 --data-dir " + s.mavrykPath + "/data"
 
 	if historyMode == snapshot.ROLLING {
 		script = script + " --rolling"
@@ -51,7 +51,7 @@ func (s *SnapshotExec) GetSnapshotName(historyMode snapshot.HistoryModeType) (st
 
 func (s *SnapshotExec) GetSnapshotHeaderOutput(filepath string) string {
 	log.Printf("Getting snapshot header output for file: %q. \n", filepath)
-	script := s.octezNodeBinPath + " snapshot info --json " + s.snapshotsPath + "/" + filepath
+	script := s.mavkitNodeBinPath + " snapshot info --json " + s.snapshotsPath + "/" + filepath
 	stdout, _ := s.execScript(script)
 	log.Printf("Snapshot header output: %q. \n", stdout.String())
 	return stdout.String()

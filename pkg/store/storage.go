@@ -13,9 +13,9 @@ import (
 	"time"
 
 	"cloud.google.com/go/storage"
-	"github.com/marigold-dev/tezos-snapshot/pkg/node"
-	"github.com/marigold-dev/tezos-snapshot/pkg/snapshot"
-	"github.com/marigold-dev/tezos-snapshot/pkg/util"
+	"github.com/mavryk-network/mavryk-snapshot/pkg/node"
+	"github.com/mavryk-network/mavryk-snapshot/pkg/snapshot"
+	"github.com/mavryk-network/mavryk-snapshot/pkg/util"
 	"github.com/samber/lo"
 	"google.golang.org/api/iterator"
 )
@@ -100,8 +100,8 @@ func (s *SnapshotStorage) GetSnapshotItems(ctx context.Context) []snapshot.Snaps
 		checksum := obj.Metadata["SHA256CHECKSUM"]
 		snapshotHeaderJson := obj.Metadata["SNAPSHOT_HEADER"]
 		versionJson, versionExist := obj.Metadata["VERSION"]
-		version := snapshot.TezosVersion{}
-		version.Implementation = "octez"
+		version := snapshot.MavrykVersion{}
+		version.Implementation = "mavkit"
 		if versionExist {
 			json.Unmarshal([]byte(versionJson), &version)
 		} else {
@@ -150,7 +150,7 @@ func (s *SnapshotStorage) GetSnapshotItems(ctx context.Context) []snapshot.Snaps
 			BlockHash:       snapshotHeader.BlockHash,
 			BlockHeight:     snapshotHeader.Level,
 			SHA256:          checksum,
-			TezosVersion:    version,
+			MavrykVersion:   version,
 			ArtifactType:    snapshot.SNAPSHOT,
 			HistoryMode:     snapshot.HistoryModeType(snapshotHeader.Mode),
 			SnapshotVersion: snapshotHeader.Version,
@@ -245,7 +245,7 @@ func (s *SnapshotStorage) uploadSnapshot(ctx context.Context, file *os.File, sna
 	node.CheckNodesAreReady()
 
 	// Request node version
-	version := node.GetTezosVersion()
+	version := node.GetMavrykVersion()
 
 	// Getting Sha256 checksum
 	sha256Checksum := fmt.Sprintf("%x", hasher.Sum(nil))

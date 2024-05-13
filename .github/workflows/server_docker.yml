@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - "main"
+      - "mavryk-protocol-refactoring"
     paths-ignore:
       - 'frontend/**'
 
@@ -31,7 +32,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push
-        id: docker_build_tezos_snapshot_server
+        id: docker_build_mavryk_snapshot_server
         uses: docker/build-push-action@v3
         with:
           file: server.Dockerfile
@@ -42,6 +43,6 @@ jobs:
           # Only push if on main branch
           push: ${{ github.ref == 'refs/heads/main' && github.event_name == 'push' }}
           tags: |
-            ghcr.io/marigold-dev/tezos-snapshot-server:latest
-            ghcr.io/marigold-dev/tezos-snapshot-server:${{ steps.vars.outputs.date }}-${{ steps.vars.outputs.sha_short }}
+            ghcr.io/mavryk-network/mavryk-snapshot-server:latest
+            ghcr.io/mavryk-network/mavryk-snapshot-server:${{ steps.vars.outputs.date }}-${{ steps.vars.outputs.sha_short }}
 

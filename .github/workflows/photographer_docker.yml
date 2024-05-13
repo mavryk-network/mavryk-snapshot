@@ -6,7 +6,7 @@ on:
       version:
         required: true
         default: 'release'
-        description: 'Tezos image version or tag'
+        description: 'Mavryk image version or tag'
 
 jobs:
   docker:
@@ -47,7 +47,7 @@ jobs:
           # Only push if on main branch
           push: ${{ github.ref == 'refs/heads/main' }}
           tags: |
-            ghcr.io/marigold-dev/photographer:latest
-            ghcr.io/marigold-dev/photographer:${{ env.VERSION }}
-            ghcr.io/marigold-dev/photographer:${{ github.sha }}
+            ghcr.io/mavryk-network/photographer:latest
+            ghcr.io/mavryk-network/photographer:${{ env.VERSION }}
+            ghcr.io/mavryk-network/photographer:${{ github.sha }}
 

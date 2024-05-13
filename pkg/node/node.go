@@ -21,7 +21,7 @@ func CheckNodesAreReady() {
 	}
 }
 
-func GetTezosVersion() string {
+func GetMavrykVersion() string {
 	reqVersion, err := http.Get("http://localhost:8732/version")
 	if err != nil {
 		log.Fatalf("Unable to get node version. %v \n", err)

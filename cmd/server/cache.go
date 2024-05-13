@@ -7,8 +7,8 @@ import (
 	"time"
 
 	"cloud.google.com/go/storage"
-	"github.com/marigold-dev/tezos-snapshot/pkg/snapshot"
-	"github.com/marigold-dev/tezos-snapshot/pkg/store"
+	"github.com/mavryk-network/mavryk-snapshot/pkg/snapshot"
+	"github.com/mavryk-network/mavryk-snapshot/pkg/store"
 	"github.com/patrickmn/go-cache"
 )
 
@@ -30,8 +30,8 @@ func getSnapshotResponseCached(ctx context.Context, goCache *cache.Cache, bucket
 	data := snapshotStorage.GetSnapshotItems(ctx)
 	response := SnapshotResponse{
 		DateGenerated: time.Now().UTC().Format("2006-01-02T15:04:05Z07:00"),
-		Org:           "Marigold",
-		Schema:        "https://raw.githubusercontent.com/oxheadalpha/tezos-snapshot-metadata-schema/9e48a543fbe0eadbe68589f1de65f510b8e41ee0/tezos-snapshot-metadata.schema.json",
+		Org:           "MavrykDynamics",
+		Schema:        "https://raw.githubusercontent.com/mavryk-network/mavryk-snapshot-metadata-schema/main/mavryk-snapshot-metadata.schema.json",
 		Data:          data,
 	}
 

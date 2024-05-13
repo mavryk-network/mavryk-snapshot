@@ -13,14 +13,14 @@ func Test_fileinfo(t *testing.T) {
 		{
 			name: "Test_fileinfo",
 			args: []string{
-				"TEZOS_HANGZHOUNET_2022-01-22T15:00:00Z-BKpkmdGCx8D9KAUAYJrrrmFqgamcwZWFYo2W4KiyEP4PCBJQrsC-589926.full",
-				"TEZOS_ITHACANET_2022-01-22T15:00:00Z-BKpkmdGCx8D9KAUAYJrrrmFqgamcwZWFYo2W4KiyEP4PCBJQrsC-589926.rolling",
-				"TEZOS_MAINNET-BL4p3YRfxhiQP16PsuzFBbph8QqVcNN3qu42r5JgNgdaw3xW81g-2396664.rolling",
-				"TEZOS_MAINNET-BMBDsvNoA4wr4VANmUJfMPPEpCKKBYY7xBoYfhJkUuoGk54GYPa-4593763.rolling",
+				// "MAVRYK_HANGZHOUNET_2022-01-22T15:00:00Z-BKpkmdGCx8D9KAUAYJrrrmFqgamcwZWFYo2W4KiyEP4PCBJQrsC-589926.full",
+				"MAVRYK_BASENET_2022-01-22T15:00:00Z-BKpkmdGCx8D9KAUAYJrrrmFqgamcwZWFYo2W4KiyEP4PCBJQrsC-589926.rolling",
+				"MAVRYK_MAINNET-BL4p3YRfxhiQP16PsuzFBbph8QqVcNN3qu42r5JgNgdaw3xW81g-2396664.rolling",
+				"MAVRYK_MAINNET-BMBDsvNoA4wr4VANmUJfMPPEpCKKBYY7xBoYfhJkUuoGk54GYPa-4593763.rolling",
 			},
 			want: []string{
-				"hangzhounet",
-				"ghostnet",
+				// "hangzhounet",
+				"basenet",
 				"mainnet",
 				"mainnet",
 			},

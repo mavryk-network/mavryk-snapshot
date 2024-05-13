@@ -14,7 +14,7 @@ type BlockHeaderResponse struct {
 	Signature string `json:"signature"`
 }
 
-type TezosVersion struct {
+type MavrykVersion struct {
 	Implementation string     `json:"implementation"`
 	Version        Version    `json:"version"`
 	CommitInfo     CommitInfo `json:"commit_info"`
@@ -35,7 +35,7 @@ type ArtifactType string
 type HistoryModeType string
 
 const (
-	SNAPSHOT ArtifactType = "tezos-snapshot"
+	SNAPSHOT ArtifactType = "mavryk-snapshot"
 	TARBALL  ArtifactType = "tarball"
 )
 const (
@@ -58,24 +58,22 @@ type SnapshotItem struct {
 	HistoryMode     HistoryModeType `json:"history_mode"`
 	FilesizeBytes   int64           `json:"filesize_bytes"`
 	Date            time.Time       `json:"date"`
-	TezosVersion    TezosVersion    `json:"tezos_version"`
+	MavrykVersion   MavrykVersion   `json:"mavryk_version"`
 	SnapshotVersion int             `json:"snapshot_version"`
 }
 
 // NetworkProtocolPriority it's a way to sort like that:
 // 1. Mainnet
-// 2. Ithacanet/Ghostnet
+// 2. Atlasnet/Basenet
 // 3. Others...
-// 4. Limannet,
-// 5. Mumbainet
 func (s *SnapshotItem) NetworkProtocolPriority() int {
 	// Mainnet then will be the first on the list
 	if s.ChainName == "mainnet" {
 		return math.MaxInt
 	}
 
-	// Ithacanet/Ghostnet, then will be the last on the list
-	if s.ChainName == "ithacanet" || s.ChainName == "ghostnet" {
+	// Atlasnet/Basenet, then will be the last on the list
+	if s.ChainName == "atlasnet" || s.ChainName == "basenet" {
 		return math.MaxInt - 1
 	}
 

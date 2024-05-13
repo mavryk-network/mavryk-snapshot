@@ -5,7 +5,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/marigold-dev/tezos-snapshot/pkg/snapshot"
+	"github.com/mavryk-network/mavryk-snapshot/pkg/snapshot"
 )
 
 type File struct {

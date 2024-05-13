@@ -51,7 +51,7 @@ export default function HeaderBar () {
         paddingLeft: '10px', justifyContent: 'left'
       }} sx={{ flexGrow: 1 }}>
         <Typography style={{ color: theme.palette.text.primary, marginLeft: '25px' }} variant="h6" color="inherit" noWrap>
-          TEZOS SNAPSHOTS
+          MAVRYK SNAPSHOTS
         </Typography>
       </Box>
       }
@@ -59,24 +59,24 @@ export default function HeaderBar () {
       {!isMobile() &&
         <span style={{ display: 'flex', alignItems: 'center' }}>
           <Separator></Separator>
-          <SnapshotLink url="https://snapshots.tezos.marigold.dev/api">
+          <SnapshotLink url="https://snapshots.mavryk.network/api">
             API
           </SnapshotLink>
           <Separator></Separator>
-          <SnapshotLink url="https://snapshots.tezos.marigold.dev/api/mainnet/full">
+          <SnapshotLink url="https://snapshots.mavryk.network/api/mainnet/full">
             FULL MAINNET
           </SnapshotLink>
           <Separator></Separator>
-          <SnapshotLink url="https://snapshots.tezos.marigold.dev/api/mainnet/rolling">
+          <SnapshotLink url="https://snapshots.mavryk.network/api/mainnet/rolling">
             ROLLING MAINNET
           </SnapshotLink>
           <Separator></Separator>
-          <SnapshotLink url="https://snapshots.tezos.marigold.dev/api/ghostnet/full">
-            FULL GHOST
+          <SnapshotLink url="https://snapshots.mavryk.network/api/basenet/full">
+            FULL BASE
           </SnapshotLink>
           <Separator></Separator>
-          <SnapshotLink url="https://snapshots.tezos.marigold.dev/api/ghostnet/rolling">
-            ROLLING GHOST
+          <SnapshotLink url="https://snapshots.mavryk.network/api/basenet/rolling">
+            ROLLING BASE
           </SnapshotLink>
           <Separator></Separator>
         </span>}
