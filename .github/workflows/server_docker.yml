@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - "main"
-      - "mavryk-protocol-refactoring"
     paths-ignore:
       - 'frontend/**'
 
@@ -41,7 +40,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           # Only push if on main branch
-          push: ${{ github.ref == 'refs/heads/main' && github.event_name == 'push' }}
+          push: ${{ github.event_name == 'push' }}
           tags: |
             ghcr.io/mavryk-network/mavryk-snapshot-server:latest
             ghcr.io/mavryk-network/mavryk-snapshot-server:${{ steps.vars.outputs.date }}-${{ steps.vars.outputs.sha_short }}
