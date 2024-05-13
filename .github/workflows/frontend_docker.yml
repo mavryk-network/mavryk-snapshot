@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - "main"
+      - "mavryk-protocol-refactoring"
     paths:
       - 'frontend/**'
 
