@@ -37,11 +37,11 @@ export default function HeaderBar () {
     justifyContent: 'center'
   }}>
     <Toolbar>
-        <Link style={{ color: theme.palette.text.primary, flexGrow: isMobile() ? 1 : 0, fontFamily: '"Roboto","Helvetica","Arial",sans-serif', display: 'flex', alignItems: 'center' }} href="https://marigold.dev" underline="none">
-          <img style={{ marginRight: '10px' }} src="https://uploads-ssl.webflow.com/616ab4741d375d1642c19027/61793ee65c891c190fcaa1d0_Vector(1).png" alt="Marigold Logo" width="24" height="24"></img>
+        <Link style={{ color: theme.palette.text.primary, flexGrow: isMobile() ? 1 : 0, fontFamily: '"Roboto","Helvetica","Arial",sans-serif', display: 'flex', alignItems: 'center' }} href="https://mavrykdynamics.com" underline="none">
+          <img style={{ marginRight: '10px' }} src="img/mavryk-small-light.svg" alt="Marigold Logo" width="24" height="24"></img>
 
         <Typography style={{ marginRight: isMobile() ? '0px' : '24px' }} variant="h6" color="inherit" noWrap>
-          MARIGOLD {isMobile() && <span> SNAPSHOTS </span>}
+          MAVRYK {isMobile() && <span> SNAPSHOTS </span>}
           </Typography>
         </Link>
 
@@ -57,26 +57,41 @@ export default function HeaderBar () {
       }
 
       {!isMobile() &&
+        // <span style={{ display: 'flex', alignItems: 'center' }}>
+        //   <Separator></Separator>
+        //   <SnapshotLink url="https://snapshots.api.mavryk.network">
+        //     API
+        //   </SnapshotLink>
+        //   <Separator></Separator>
+        //   <SnapshotLink url="https://snapshots.api.mavryk.network/mainnet/full">
+        //     FULL MAINNET
+        //   </SnapshotLink>
+        //   <Separator></Separator>
+        //   <SnapshotLink url="https://snapshots.api.mavryk.network/mainnet/rolling">
+        //     ROLLING MAINNET
+        //   </SnapshotLink>
+        //   <Separator></Separator>
+        //   <SnapshotLink url="https://snapshots.api.mavryk.network/basenet/full">
+        //     FULL BASE
+        //   </SnapshotLink>
+        //   <Separator></Separator>
+        //   <SnapshotLink url="https://snapshots.api.mavryk.network/basenet/rolling">
+        //     ROLLING BASE
+        //   </SnapshotLink>
+        //   <Separator></Separator>
+        // </span>}
         <span style={{ display: 'flex', alignItems: 'center' }}>
           <Separator></Separator>
-          <SnapshotLink url="https://snapshots.mavryk.network/api">
+          <SnapshotLink url="https://snapshots.api.mavryk.network">
             API
           </SnapshotLink>
           <Separator></Separator>
-          <SnapshotLink url="https://snapshots.mavryk.network/api/mainnet/full">
-            FULL MAINNET
+          <SnapshotLink url="https://snapshots.api.mavryk.network/atlasnet/full">
+            FULL ATLASNET
           </SnapshotLink>
           <Separator></Separator>
-          <SnapshotLink url="https://snapshots.mavryk.network/api/mainnet/rolling">
-            ROLLING MAINNET
-          </SnapshotLink>
-          <Separator></Separator>
-          <SnapshotLink url="https://snapshots.mavryk.network/api/basenet/full">
-            FULL BASE
-          </SnapshotLink>
-          <Separator></Separator>
-          <SnapshotLink url="https://snapshots.mavryk.network/api/basenet/rolling">
-            ROLLING BASE
+          <SnapshotLink url="https://snapshots.api.mavryk.network/atlasnet/rolling">
+            ROLLING ATLASNET
           </SnapshotLink>
           <Separator></Separator>
         </span>}
