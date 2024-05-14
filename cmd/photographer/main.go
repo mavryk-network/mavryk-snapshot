@@ -36,9 +36,9 @@ func task() {
 	maxDays := util.GetEnvInt("MAX_DAYS", 7)
 	maxMonths := util.GetEnvInt("MAX_MONTHS", 6)
 	network := strings.ToLower(os.Getenv("NETWORK"))
-	snapshotsPath := util.GetEnvString("SNAPSHOTS_PATH", "/var/run/tezos/snapshots")
+	snapshotsPath := util.GetEnvString("SNAPSHOTS_PATH", "/var/mavryk/snapshots")
 	mavkitNodepath := util.GetEnvString("MAVKIT_NODE_PATH", "/usr/local/bin/mavkit-node")
-	mavrykPath := util.GetEnvString("MAVRYK_PATH", "/var/run/tezos/node")
+	mavrykPath := util.GetEnvString("MAVRYK_PATH", "/var/mavryk/node")
 	mavrykConfig := util.GetEnvString("MAVRYK_CONFIG", "/etc/mavryk/config.json")
 
 	snapshotExec := NewSnapshotExec(snapshotsPath, mavkitNodepath, mavrykPath, mavrykConfig)
