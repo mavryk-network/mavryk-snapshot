@@ -29,14 +29,14 @@ func NewSnapshotStorage(client *storage.Client, bucketName string) *SnapshotStor
 	return &SnapshotStorage{client: client, bucketName: bucketName}
 }
 
-func (s *SnapshotStorage) EphemeralUpload(ctx context.Context, filename, snapshotHeaderOutput string) {
+func (s *SnapshotStorage) EphemeralUpload(ctx context.Context, filename, snapshotHeaderOutput string, snapshotsPath string) {
 	// Save the current working directory so we can revert back
 	currentDir, err := os.Getwd()
 	if err != nil {
 		log.Fatalf("Failed to get current directory: %v", err)
 	}
 	// Change to the desired directory
-	if err := os.Chdir("/var/run/tezos/snapshots/"); err != nil {
+	if err := os.Chdir(snapshotsPath); err != nil {
 		log.Fatalf("Failed to change directory: %v", err)
 	}
 

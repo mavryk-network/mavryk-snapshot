@@ -65,10 +65,10 @@ func task() {
 	snapshotStorage := store.NewSnapshotStorage(client, bucketName)
 
 	// Check if today the rolling snapshot already exists
-	execute(ctx, snapshotStorage, snapshot.ROLLING, network, snapshotExec)
+	execute(ctx, snapshotStorage, snapshot.ROLLING, network, snapshotExec, snapshotsPath)
 
 	// Check if today the full snapshot already exists
-	execute(ctx, snapshotStorage, snapshot.FULL, network, snapshotExec)
+	execute(ctx, snapshotStorage, snapshot.FULL, network, snapshotExec, snapshotsPath)
 
 	snapshotStorage.DeleteExpiredSnapshots(ctx, maxDays, maxMonths)
 
@@ -78,7 +78,7 @@ func task() {
 	log.Printf("Snapshot job took %s", time.Since(start))
 }
 
-func execute(ctx context.Context, snapshotStorage *store.SnapshotStorage, historyMode snapshot.HistoryModeType, chain string, snapshotExec *SnapshotExec) {
+func execute(ctx context.Context, snapshotStorage *store.SnapshotStorage, historyMode snapshot.HistoryModeType, chain string, snapshotExec *SnapshotExec, snapshotsPath string) {
 	todayItems := snapshotStorage.GetTodaySnapshotsItems(ctx)
 
 	alreadyExist := lo.SomeBy(todayItems, func(item snapshot.SnapshotItem) bool {
@@ -97,5 +97,5 @@ func execute(ctx context.Context, snapshotStorage *store.SnapshotStorage, histor
 	}
 	snapshotHeaderOutput := snapshotExec.GetSnapshotHeaderOutput(snapshotfilename)
 
-	snapshotStorage.EphemeralUpload(ctx, snapshotfilename, snapshotHeaderOutput)
+	snapshotStorage.EphemeralUpload(ctx, snapshotfilename, snapshotHeaderOutput, snapshotsPath)
 }
