@@ -14,15 +14,16 @@ type SnapshotExec struct {
 	snapshotsPath     string
 	mavkitNodeBinPath string
 	mavrykPath        string
+	mavrykConfig      string
 }
 
-func NewSnapshotExec(snapshotsPath, mavkitNodePath, mavrykPath string) *SnapshotExec {
-	return &SnapshotExec{snapshotsPath, mavkitNodePath, mavrykPath}
+func NewSnapshotExec(snapshotsPath, mavkitNodePath, mavrykPath string, mavrykConfig string) *SnapshotExec {
+	return &SnapshotExec{snapshotsPath, mavkitNodePath, mavrykPath, mavrykConfig}
 }
 
 func (s *SnapshotExec) CreateSnapshot(historyMode snapshot.HistoryModeType) {
 	log.Println("Creating snapshot.")
-	script := "mkdir -p " + s.snapshotsPath + " && cd " + s.snapshotsPath + " && " + s.mavkitNodeBinPath + " snapshot export --block head~10 --data-dir " + s.mavrykPath + "/data"
+	script := "mkdir -p " + s.snapshotsPath + " && cd " + s.snapshotsPath + " && " + s.mavkitNodeBinPath + " snapshot export --block head~10 --data-dir " + s.mavrykPath + "/data --config-file " + s.mavrykConfig
 
 	if historyMode == snapshot.ROLLING {
 		script = script + " --rolling"

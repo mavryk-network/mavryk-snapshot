@@ -39,8 +39,9 @@ func task() {
 	snapshotsPath := util.GetEnvString("SNAPSHOTS_PATH", "/var/run/tezos/snapshots")
 	mavkitNodepath := util.GetEnvString("MAVKIT_NODE_PATH", "/usr/local/bin/mavkit-node")
 	mavrykPath := util.GetEnvString("MAVRYK_PATH", "/var/run/tezos/node")
+	mavrykConfig := util.GetEnvString("MAVRYK_CONFIG", "/etc/mavryk/config.json")
 
-	snapshotExec := NewSnapshotExec(snapshotsPath, mavkitNodepath, mavrykPath)
+	snapshotExec := NewSnapshotExec(snapshotsPath, mavkitNodepath, mavrykPath, mavrykConfig)
 
 	if bucketName == "" {
 		log.Fatalln("The BUCKET_NAME environment variable is empty.")
