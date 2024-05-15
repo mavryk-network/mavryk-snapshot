@@ -47,7 +47,7 @@ const SnapshotItem = (props: { snapshot: Snapshot }) => {
             fontWeight: 'bold',
             fontSize: 'x-small',
             overflowWrap: 'break-word',
-            color: 'rgb(235, 52, 72)',
+            color: '#5F58FF',
           }}
           component="div"
         >
@@ -68,7 +68,7 @@ const SnapshotItem = (props: { snapshot: Snapshot }) => {
             fontWeight: 'bold',
             fontSize: 'x-small',
             overflowWrap: 'break-word',
-            color: 'rgb(235, 52, 72)',
+            color: '#5F58FF',
           }}
           component="div"
         >
@@ -90,7 +90,7 @@ const SnapshotItem = (props: { snapshot: Snapshot }) => {
             fontWeight: 'bold',
             fontSize: 'x-small',
             overflowWrap: 'break-word',
-            color: 'rgb(235, 52, 72)',
+            color: '#5F58FF',
           }}
           component="div"
         >
@@ -112,7 +112,7 @@ const SnapshotItem = (props: { snapshot: Snapshot }) => {
             fontWeight: 'bold',
             fontSize: 'x-small',
             overflowWrap: 'break-word',
-            color: 'rgb(235, 52, 72)',
+            color: '#5F58FF',
           }}
           component="div"
         >
@@ -132,7 +132,7 @@ const SnapshotItem = (props: { snapshot: Snapshot }) => {
       </CardContent>
 
       <CardActions sx={{ justifyContent: 'right' }}>
-        <Button
+        {/* <Button
           sx={{
             color: theme.palette.text.primary,
             textDecoration: 'underline',
@@ -159,7 +159,7 @@ const SnapshotItem = (props: { snapshot: Snapshot }) => {
           }
         >
           TzStats
-        </Button>
+        </Button> */}
         <Button
           sx={{
             color: theme.palette.text.primary,

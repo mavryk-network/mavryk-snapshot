@@ -5,7 +5,7 @@ export default function DateSeparator (props: { snapshot: Snapshot; }) {
   return (
     <div style={{
       marginTop: '30px',
-      color: '#eb3448',
+      color: '#5F58FF',
       marginBottom: '10px',
       textAlign: 'right',
       fontSize: '2.0vh',

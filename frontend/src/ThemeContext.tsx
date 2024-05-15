@@ -33,7 +33,7 @@ export default function ThemeContext() {
             main: '#fcfcfc',
           },
           secondary: {
-            main: '#eb3448',
+            main: '#5F58FF',
           },
           text: {
             primary: 'rgba(0,0,0,.83)',
@@ -46,10 +46,10 @@ export default function ThemeContext() {
       : {
           // palette values for dark mode
           primary: {
-            main: '#1c1d22',
+            main: '#010101',
           },
           secondary: {
-            main: '#eb3448',
+            main: '#5F58FF',
           },
           text: {
             primary: '#FFFFFF',

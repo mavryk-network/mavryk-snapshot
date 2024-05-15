@@ -12,7 +12,7 @@ const SnapshotLink = (props: { url: string, children: string }) => {
       display: 'flex',
       alignItems: 'center',
       '&:hover': {
-        backgroundColor: '#eb3448 !important',
+        backgroundColor: '#5F58FF !important',
         cursor: 'pointer'
       }
     },
