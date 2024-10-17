@@ -91,26 +91,30 @@ func (s *SnapshotExec) GetArchiveTarballHeaderOutput(filepath string) string {
 	log.Printf("Getting tarball header output for file: %q. \n", filepath)
 	script := "wget -qO-  http://127.0.0.1:8732/chains/main/blocks/head/header | sed -E 's/.*\"hash\":\"?([^,\"]*)\"?.*/\\1/'"
 	block_hash, _ := s.execScript(script)
+	cleaned_block_hash := strings.ReplaceAll(block_hash.String(), "\n", "")
 	script = "wget -qO-  http://127.0.0.1:8732/chains/main/blocks/head/header | sed -E 's/.*\"level\":\"?([^,\"]*)\"?.*/\\1/'"
 	level_string, _ := s.execScript(script)
-	level, err := strconv.Atoi(level_string.String())
+	cleaned_level_string := strings.ReplaceAll(level_string.String(), "\n", "")
+	level, err := strconv.Atoi(cleaned_level_string)
 	if err != nil {
 		panic(err)
 	}
 	script = "wget -qO-  http://127.0.0.1:8732/chains/main/blocks/head/header | sed -E 's/.*\"timestamp\":\"?([^,\"]*)\"?.*/\\1/'"
 	timestamp, _ := s.execScript(script)
+	cleaned_timestamp := strings.ReplaceAll(timestamp.String(), "\n", "")
 	script = "sed -n 's/.*\"chain_name\": \"\\([^\"]*\\)\".*/\\1/p' " + s.mavrykConfig
 	chain_name, _ := s.execScript(script)
+	cleaned_chain_name := strings.ReplaceAll(chain_name.String(), "\n", "")
 
 	// Create an instance of Snapshot
 	snapshot := Snapshot{
 		SnapshotHeader: SnapshotHeader{
 			Version:   7,
-			ChainName: chain_name.String(),
+			ChainName: cleaned_chain_name,
 			Mode:      "archive",
-			BlockHash: block_hash.String(),
+			BlockHash: cleaned_block_hash,
 			Level:     level,
-			Timestamp: timestamp.String(),
+			Timestamp: cleaned_timestamp,
 		},
 	}
 
