@@ -29,6 +29,10 @@ func (s *SnapshotExec) CreateSnapshot(historyMode snapshot.HistoryModeType) {
 		script = script + " --rolling"
 	}
 
+	if historyMode == snapshot.ARCHIVE {
+		script = script + " --archive"
+	}
+
 	_, _ = s.execScript(script)
 }
 
