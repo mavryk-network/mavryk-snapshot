@@ -70,9 +70,6 @@ func task() {
 	// Check if today the full snapshot already exists
 	execute(ctx, snapshotStorage, snapshot.FULL, network, snapshotExec, snapshotsPath)
 
-	// Check if today the archive snapshot already exists
-	execute(ctx, snapshotStorage, snapshot.ARCHIVE, network, snapshotExec, snapshotsPath)
-
 	snapshotStorage.DeleteExpiredSnapshots(ctx, maxDays, maxMonths)
 
 	// Delete local snapshots

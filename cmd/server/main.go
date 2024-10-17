@@ -26,9 +26,6 @@ func main() {
 	downloadableHandlerBuilder := func(chain string) func(c echo.Context) error {
 		return func(c echo.Context) error {
 			historyMode := snapshot.ROLLING
-			if c.Param("type") == "archive" {
-				historyMode = snapshot.ARCHIVE
-			}
 			if c.Param("type") == "full" {
 				historyMode = snapshot.FULL
 			}

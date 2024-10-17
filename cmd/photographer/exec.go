@@ -2,12 +2,10 @@ package main
 
 import (
 	"bytes"
-	"context"
 	"fmt"
 	"log"
 	"os/exec"
 	"strings"
-	"time"
 
 	"github.com/mavryk-network/mavryk-snapshot/pkg/snapshot"
 )
@@ -29,10 +27,6 @@ func (s *SnapshotExec) CreateSnapshot(historyMode snapshot.HistoryModeType) {
 
 	if historyMode == snapshot.ROLLING {
 		script = script + " --rolling"
-	}
-
-	if historyMode == snapshot.ARCHIVE {
-		script = script + " --archive"
 	}
 
 	_, _ = s.execScript(script)
@@ -72,30 +66,14 @@ func (s *SnapshotExec) DeleteLocalSnapshots() {
 
 func (s *SnapshotExec) execScript(script string) (bytes.Buffer, bytes.Buffer) {
 	log.Printf("Executing script: %q. \n", script)
-
-	// Set a timeout (e.g., 60 seconds)
-	ctx, cancel := context.WithTimeout(context.Background(), 3600*time.Second)
-	defer cancel()
-
-	// Prepare the command with context
-	cmd := exec.CommandContext(ctx, "sh", "-c", script)
-
-	// Buffers for stdout and stderr
+	cmd := exec.Command("sh", "-c", script)
 	var stdout, stderr bytes.Buffer
 	cmd.Stdout = &stdout
 	cmd.Stderr = &stderr
-
-	// Run the command
 	err := cmd.Run()
-
-	// Check if the context was canceled (timeout reached)
-	if ctx.Err() == context.DeadlineExceeded {
-		log.Printf("Timeout reached for script: %q, but execution will continue. \n", script)
-	} else if err != nil {
+	if err != nil {
 		log.Fatalf("%v \n", err)
 	}
-
-	// Log stdout and stderr if they contain output
 	if stdout.Len() > 0 {
 		log.Printf("stdout: \n%s\n", stdout.String())
 	}

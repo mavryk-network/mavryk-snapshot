@@ -39,9 +39,6 @@ func (f *File) NetworkProtocol() string {
 func (f *File) HistoryMode() snapshot.HistoryModeType {
 	historyMode := snapshot.HistoryModeType(snapshot.FULL)
 
-	if strings.Contains(f.Name, "archive") {
-		historyMode = snapshot.HistoryModeType(snapshot.ARCHIVE)
-	}
 	if strings.Contains(f.Name, "rolling") {
 		historyMode = snapshot.HistoryModeType(snapshot.ROLLING)
 	}
