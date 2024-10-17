@@ -101,10 +101,12 @@ func execute(ctx context.Context, snapshotStorage *store.SnapshotStorage, histor
 		log.Fatalf("%v \n", err)
 	}
 
-	snapshotHeaderOutput := snapshotExec.GetSnapshotHeaderOutput(snapshotfilename)
+	snapshotHeaderOutput := ""
 
 	if historyMode == snapshot.ARCHIVE {
 		snapshotHeaderOutput = snapshotExec.GetArchiveTarballHeaderOutput(snapshotfilename)
+	} else {
+		snapshotHeaderOutput = snapshotExec.GetSnapshotHeaderOutput(snapshotfilename)
 	}
 
 	snapshotStorage.EphemeralUpload(ctx, snapshotfilename, snapshotHeaderOutput, snapshotsPath)
