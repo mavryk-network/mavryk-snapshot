@@ -25,6 +25,9 @@ func getInfoFromfilename(filename string) *FileInfo {
 
 	historyMode := snapshot.HistoryModeType(snapshot.FULL)
 
+	if strings.Contains(filename, "archive") {
+		historyMode = snapshot.HistoryModeType(snapshot.ARCHIVE)
+	}
 	if strings.Contains(filename, "rolling") {
 		historyMode = snapshot.HistoryModeType(snapshot.ROLLING)
 	}

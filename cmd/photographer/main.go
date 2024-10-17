@@ -37,11 +37,13 @@ func task() {
 	maxMonths := util.GetEnvInt("MAX_MONTHS", 6)
 	network := strings.ToLower(os.Getenv("NETWORK"))
 	snapshotsPath := util.GetEnvString("SNAPSHOTS_PATH", "/var/mavryk/snapshots")
+	mavkitClientpath := util.GetEnvString("MAVKIT_CLIENT_PATH", "/usr/local/bin/mavkit-client")
 	mavkitNodepath := util.GetEnvString("MAVKIT_NODE_PATH", "/usr/local/bin/mavkit-node")
 	mavrykPath := util.GetEnvString("MAVRYK_PATH", "/var/mavryk/node")
+	mavrykVolume := util.GetEnvString("MAVRYK_VOLUME", "/var/mavryk")
 	mavrykConfig := util.GetEnvString("MAVRYK_CONFIG", "/etc/mavryk/config.json")
 
-	snapshotExec := NewSnapshotExec(snapshotsPath, mavkitNodepath, mavrykPath, mavrykConfig)
+	snapshotExec := NewSnapshotExec(snapshotsPath, mavkitClientpath, mavkitNodepath, mavrykPath, mavrykVolume, mavrykConfig)
 
 	if bucketName == "" {
 		log.Fatalln("The BUCKET_NAME environment variable is empty.")
@@ -70,6 +72,9 @@ func task() {
 	// Check if today the full snapshot already exists
 	execute(ctx, snapshotStorage, snapshot.FULL, network, snapshotExec, snapshotsPath)
 
+	// Check if today the archive snapshot already exists
+	execute(ctx, snapshotStorage, snapshot.ARCHIVE, network, snapshotExec, snapshotsPath)
+
 	snapshotStorage.DeleteExpiredSnapshots(ctx, maxDays, maxMonths)
 
 	// Delete local snapshots
@@ -95,7 +100,12 @@ func execute(ctx context.Context, snapshotStorage *store.SnapshotStorage, histor
 	if err != nil {
 		log.Fatalf("%v \n", err)
 	}
+
 	snapshotHeaderOutput := snapshotExec.GetSnapshotHeaderOutput(snapshotfilename)
+
+	if historyMode == snapshot.ARCHIVE {
+		snapshotHeaderOutput = snapshotExec.GetArchiveTarballHeaderOutput(snapshotfilename)
+	}
 
 	snapshotStorage.EphemeralUpload(ctx, snapshotfilename, snapshotHeaderOutput, snapshotsPath)
 }

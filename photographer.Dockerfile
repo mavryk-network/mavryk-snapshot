@@ -14,6 +14,8 @@ RUN cd cmd/photographer && go build -ldflags "-linkmode 'external' -extldflags '
 FROM mavrykdynamics/mavryk:${VERSION}
 COPY --from=builder /main ./
 
+RUN apk add lz4
+
 USER tezos
 ENV USER=tezos
 
