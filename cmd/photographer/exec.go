@@ -47,7 +47,14 @@ func (s *SnapshotExec) CreateSnapshot(historyMode snapshot.HistoryModeType) {
 	}
 
 	if historyMode == snapshot.ARCHIVE {
-		script = "mkdir -p " + s.snapshotsPath + " && cd " + s.snapshotsPath + " && tar cf - . --exclude='node/data/identity.json' --exclude='node/data/lock' --exclude='node/data/peers.json' --exclude='./lost+found' -C " + s.mavrykVolume + " | lz4"
+		script = "wget -qO-  http://127.0.0.1:8732/chains/main/blocks/head/header | sed -E 's/.*\"hash\":\"?([^,\"]*)\"?.*/\\1/'"
+		block_hash, _ := s.execScript(script)
+		script = "wget -qO-  http://127.0.0.1:8732/chains/main/blocks/head/header | sed -E 's/.*\"level\":\"?([^,\"]*)\"?.*/\\1/'"
+		level, _ := s.execScript(script)
+		script = "sed -n 's/.*\"chain_name\": \"\\([^\"]*\\)\".*/\\1/p' " + s.mavrykConfig
+		chain_name, _ := s.execScript(script)
+		filename := chain_name.String() + "-" + block_hash.String() + "-" + level.String()
+		script = "mkdir -p " + s.snapshotsPath + " && cd " + s.snapshotsPath + " && tar cf " + filename + " . --exclude='node/data/identity.json' --exclude='node/data/lock' --exclude='node/data/peers.json' --exclude='./lost+found' -C " + s.mavrykVolume + " | lz4 | tee >(sha256sum | awk '{print $1}' > archive-tarball.sha256)"
 	}
 
 	_, _ = s.execScript(script)
