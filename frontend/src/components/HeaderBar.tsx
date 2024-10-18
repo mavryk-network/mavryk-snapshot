@@ -87,15 +87,15 @@ export default function HeaderBar () {
           </SnapshotLink>
           <Separator></Separator>
           <SnapshotLink url="https://snapshots.api.mavryk.network/basenet/archive">
-            ARCHIVE ATLASNET
+            ARCHIVE TARBALL ATLASNET
           </SnapshotLink>
           <Separator></Separator>
           <SnapshotLink url="https://snapshots.api.mavryk.network/basenet/full">
-            FULL ATLASNET
+            FULL SNAPSHOT ATLASNET
           </SnapshotLink>
           <Separator></Separator>
           <SnapshotLink url="https://snapshots.api.mavryk.network/basenet/rolling">
-            ROLLING ATLASNET
+            ROLLING SNAPSHOT ATLASNET
           </SnapshotLink>
           <Separator></Separator>
         </span>}

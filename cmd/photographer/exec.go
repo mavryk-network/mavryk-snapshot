@@ -55,7 +55,7 @@ func (s *SnapshotExec) CreateSnapshot(historyMode snapshot.HistoryModeType) {
 		chain_name, _ := s.execScript(script)
 		filename := s.snapshotsPath + "/" + chain_name.String() + "-" + block_hash.String() + "-" + level.String() + ".archive"
 		cleaned_filename := strings.ReplaceAll(filename, "\n", "")
-		script = "mkdir -p " + s.snapshotsPath + " && cd " + s.snapshotsPath + " && tar cf " + cleaned_filename + " . --exclude='node/data/identity.json' --exclude='node/data/lock' --exclude='node/data/peers.json' --exclude='./lost+found' --exclude='snapshots' -C " + s.mavrykVolume + " | lz4 | tee >(sha256sum | awk '{print $1}' > archive-tarball.sha256)"
+		script = "mkdir -p " + s.snapshotsPath + " && cd " + s.snapshotsPath + " && tar cvf - . --exclude='node/data/identity.json' --exclude='node/data/lock' --exclude='node/data/peers.json' --exclude='./lost+found' --exclude='snapshots' -C " + s.mavrykVolume + " | lz4 > " + cleaned_filename
 	}
 
 	_, _ = s.execScript(script)
