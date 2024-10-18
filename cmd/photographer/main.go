@@ -78,7 +78,7 @@ func task() {
 	snapshotStorage.DeleteExpiredSnapshots(ctx, maxDays, maxMonths)
 
 	// Delete local snapshots
-	snapshotExec.DeleteLocalSnapshots()
+	//snapshotExec.DeleteLocalSnapshots()
 
 	log.Printf("Snapshot job took %s", time.Since(start))
 }
