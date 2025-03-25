@@ -16,8 +16,8 @@ COPY --from=builder /main ./
 
 RUN sudo apk add lz4
 
-USER tezos
-ENV USER=tezos
+USER mavryk
+ENV USER=mavryk
 
 ENTRYPOINT ["./main"]
 CMD [""]
