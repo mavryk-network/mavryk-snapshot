@@ -66,11 +66,11 @@ func task() {
 
 	snapshotStorage := store.NewSnapshotStorage(client, bucketName)
 
-	// Check if today the rolling snapshot already exists
-	execute(ctx, snapshotStorage, snapshot.ROLLING, network, snapshotExec, snapshotsPath)
+	// // Check if today the rolling snapshot already exists
+	// execute(ctx, snapshotStorage, snapshot.ROLLING, network, snapshotExec, snapshotsPath)
 
-	// Check if today the full snapshot already exists
-	execute(ctx, snapshotStorage, snapshot.FULL, network, snapshotExec, snapshotsPath)
+	// // Check if today the full snapshot already exists
+	// execute(ctx, snapshotStorage, snapshot.FULL, network, snapshotExec, snapshotsPath)
 
 	// Check if today the archive snapshot already exists
 	execute(ctx, snapshotStorage, snapshot.ARCHIVE, network, snapshotExec, snapshotsPath)
