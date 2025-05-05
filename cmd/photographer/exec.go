@@ -2,11 +2,11 @@ package main
 
 import (
 	"bytes"
-	"encoding/json"
+	// "encoding/json"
 	"fmt"
 	"log"
 	"os/exec"
-	"strconv"
+	// "strconv"
 	"strings"
 
 	"github.com/mavryk-network/mavryk-snapshot/pkg/snapshot"
