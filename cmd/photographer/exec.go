@@ -46,17 +46,17 @@ func (s *SnapshotExec) CreateSnapshot(historyMode snapshot.HistoryModeType) {
 		script = script + " --rolling"
 	}
 
-	if historyMode == snapshot.ARCHIVE {
-		script = "wget -qO-  http://127.0.0.1:8732/chains/main/blocks/head/header | sed -E 's/.*\"hash\":\"?([^,\"]*)\"?.*/\\1/'"
-		block_hash, _ := s.execScript(script)
-		script = "wget -qO-  http://127.0.0.1:8732/chains/main/blocks/head/header | sed -E 's/.*\"level\":\"?([^,\"]*)\"?.*/\\1/'"
-		level, _ := s.execScript(script)
-		script = "sed -n 's/.*\"chain_name\": \"\\([^\"]*\\)\".*/\\1/p' " + s.mavrykConfig
-		chain_name, _ := s.execScript(script)
-		filename := s.snapshotsPath + "/" + chain_name.String() + "-" + block_hash.String() + "-" + level.String() + ".archive"
-		cleaned_filename := strings.ReplaceAll(filename, "\n", "")
-		script = "mkdir -p " + s.snapshotsPath + " && cd " + s.snapshotsPath + " && tar cvf - . --exclude='data/*.json' --exclude='client' --exclude='data/lock' -C " + s.mavrykPath + " | lz4 > " + cleaned_filename
-	}
+	// if historyMode == snapshot.ARCHIVE {
+	// 	script = "wget -qO-  http://127.0.0.1:8732/chains/main/blocks/head/header | sed -E 's/.*\"hash\":\"?([^,\"]*)\"?.*/\\1/'"
+	// 	block_hash, _ := s.execScript(script)
+	// 	script = "wget -qO-  http://127.0.0.1:8732/chains/main/blocks/head/header | sed -E 's/.*\"level\":\"?([^,\"]*)\"?.*/\\1/'"
+	// 	level, _ := s.execScript(script)
+	// 	script = "sed -n 's/.*\"chain_name\": \"\\([^\"]*\\)\".*/\\1/p' " + s.mavrykConfig
+	// 	chain_name, _ := s.execScript(script)
+	// 	filename := s.snapshotsPath + "/" + chain_name.String() + "-" + block_hash.String() + "-" + level.String() + ".archive"
+	// 	cleaned_filename := strings.ReplaceAll(filename, "\n", "")
+	// 	script = "mkdir -p " + s.snapshotsPath + " && cd " + s.snapshotsPath + " && tar cvf - . --exclude='data/*.json' --exclude='client' --exclude='data/lock' -C " + s.mavrykPath + " | lz4 > " + cleaned_filename
+	// }
 
 	_, _ = s.execScript(script)
 }
@@ -87,49 +87,49 @@ func (s *SnapshotExec) GetSnapshotHeaderOutput(filepath string) string {
 	return stdout.String()
 }
 
-func (s *SnapshotExec) GetArchiveTarballHeaderOutput(filepath string) string {
-	log.Printf("Getting tarball header output for file: %q. \n", filepath)
-	script := "wget -qO-  http://127.0.0.1:8732/chains/main/blocks/head/header | sed -E 's/.*\"hash\":\"?([^,\"]*)\"?.*/\\1/'"
-	block_hash, _ := s.execScript(script)
-	cleaned_block_hash := strings.ReplaceAll(block_hash.String(), "\n", "")
-	script = "wget -qO-  http://127.0.0.1:8732/chains/main/blocks/head/header | sed -E 's/.*\"level\":\"?([^,\"]*)\"?.*/\\1/'"
-	level_string, _ := s.execScript(script)
-	cleaned_level_string := strings.ReplaceAll(level_string.String(), "\n", "")
-	level, err := strconv.Atoi(cleaned_level_string)
-	if err != nil {
-		panic(err)
-	}
-	script = "wget -qO-  http://127.0.0.1:8732/chains/main/blocks/head/header | sed -E 's/.*\"timestamp\":\"?([^,\"]*)\"?.*/\\1/'"
-	timestamp, _ := s.execScript(script)
-	cleaned_timestamp := strings.ReplaceAll(timestamp.String(), "\n", "")
-	script = "sed -n 's/.*\"chain_name\": \"\\([^\"]*\\)\".*/\\1/p' " + s.mavrykConfig
-	chain_name, _ := s.execScript(script)
-	cleaned_chain_name := strings.ReplaceAll(chain_name.String(), "\n", "")
+// func (s *SnapshotExec) GetArchiveTarballHeaderOutput(filepath string) string {
+// 	log.Printf("Getting tarball header output for file: %q. \n", filepath)
+// 	script := "wget -qO-  http://127.0.0.1:8732/chains/main/blocks/head/header | sed -E 's/.*\"hash\":\"?([^,\"]*)\"?.*/\\1/'"
+// 	block_hash, _ := s.execScript(script)
+// 	cleaned_block_hash := strings.ReplaceAll(block_hash.String(), "\n", "")
+// 	script = "wget -qO-  http://127.0.0.1:8732/chains/main/blocks/head/header | sed -E 's/.*\"level\":\"?([^,\"]*)\"?.*/\\1/'"
+// 	level_string, _ := s.execScript(script)
+// 	cleaned_level_string := strings.ReplaceAll(level_string.String(), "\n", "")
+// 	level, err := strconv.Atoi(cleaned_level_string)
+// 	if err != nil {
+// 		panic(err)
+// 	}
+// 	script = "wget -qO-  http://127.0.0.1:8732/chains/main/blocks/head/header | sed -E 's/.*\"timestamp\":\"?([^,\"]*)\"?.*/\\1/'"
+// 	timestamp, _ := s.execScript(script)
+// 	cleaned_timestamp := strings.ReplaceAll(timestamp.String(), "\n", "")
+// 	script = "sed -n 's/.*\"chain_name\": \"\\([^\"]*\\)\".*/\\1/p' " + s.mavrykConfig
+// 	chain_name, _ := s.execScript(script)
+// 	cleaned_chain_name := strings.ReplaceAll(chain_name.String(), "\n", "")
 
-	// Create an instance of Snapshot
-	snapshot := Snapshot{
-		SnapshotHeader: SnapshotHeader{
-			Version:   7,
-			ChainName: cleaned_chain_name,
-			Mode:      "archive",
-			BlockHash: cleaned_block_hash,
-			Level:     level,
-			Timestamp: cleaned_timestamp,
-		},
-	}
+// 	// Create an instance of Snapshot
+// 	snapshot := Snapshot{
+// 		SnapshotHeader: SnapshotHeader{
+// 			Version:   7,
+// 			ChainName: cleaned_chain_name,
+// 			Mode:      "archive",
+// 			BlockHash: cleaned_block_hash,
+// 			Level:     level,
+// 			Timestamp: cleaned_timestamp,
+// 		},
+// 	}
 
-	// Marshal the struct into JSON
-	jsonData, err := json.Marshal(snapshot)
-	if err != nil {
-		log.Fatalf("Error marshaling to JSON: %v", err)
-	}
+// 	// Marshal the struct into JSON
+// 	jsonData, err := json.Marshal(snapshot)
+// 	if err != nil {
+// 		log.Fatalf("Error marshaling to JSON: %v", err)
+// 	}
 
-	// Convert to string and print
-	jsonString := string(jsonData)
-	log.Printf("Tarball header output: %q. \n", jsonString)
+// 	// Convert to string and print
+// 	jsonString := string(jsonData)
+// 	log.Printf("Tarball header output: %q. \n", jsonString)
 
-	return jsonString
-}
+// 	return jsonString
+// }
 
 func (s *SnapshotExec) DeleteLocalSnapshots() {
 	log.Println("Deleting local snapshots.")
