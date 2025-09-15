@@ -57,30 +57,30 @@ export default function HeaderBar () {
       }
 
       {!isMobile() &&
-        // <span style={{ display: 'flex', alignItems: 'center' }}>
-        //   <Separator></Separator>
-        //   <SnapshotLink url="https://snapshots.api.mavryk.network">
-        //     API
-        //   </SnapshotLink>
-        //   <Separator></Separator>
-        //   <SnapshotLink url="https://snapshots.api.mavryk.network/mainnet/full">
-        //     FULL MAINNET
-        //   </SnapshotLink>
-        //   <Separator></Separator>
-        //   <SnapshotLink url="https://snapshots.api.mavryk.network/mainnet/rolling">
-        //     ROLLING MAINNET
-        //   </SnapshotLink>
-        //   <Separator></Separator>
-        //   <SnapshotLink url="https://snapshots.api.mavryk.network/basenet/full">
-        //     FULL BASE
-        //   </SnapshotLink>
-        //   <Separator></Separator>
-        //   <SnapshotLink url="https://snapshots.api.mavryk.network/basenet/rolling">
-        //     ROLLING BASE
-        //   </SnapshotLink>
-        //   <Separator></Separator>
-        // </span>}
         <span style={{ display: 'flex', alignItems: 'center' }}>
+          <Separator></Separator>
+          <SnapshotLink url="https://snapshots.api.mavryk.network">
+            API
+          </SnapshotLink>
+          <Separator></Separator>
+          <SnapshotLink url="https://snapshots.api.mavryk.network/mainnet/full">
+            FULL MAINNET
+          </SnapshotLink>
+          <Separator></Separator>
+          <SnapshotLink url="https://snapshots.api.mavryk.network/mainnet/rolling">
+            ROLLING MAINNET
+          </SnapshotLink>
+          <Separator></Separator>
+          <SnapshotLink url="https://snapshots.api.mavryk.network/basenet/full">
+            FULL BASE
+          </SnapshotLink>
+          <Separator></Separator>
+          <SnapshotLink url="https://snapshots.api.mavryk.network/basenet/rolling">
+            ROLLING BASE
+          </SnapshotLink>
+          <Separator></Separator>
+        </span>}
+        {/* <span style={{ display: 'flex', alignItems: 'center' }}>
           <Separator></Separator>
           <SnapshotLink url="https://snapshots.api.mavryk.network">
             API
@@ -98,7 +98,7 @@ export default function HeaderBar () {
             ROLLING SNAPSHOT ATLASNET
           </SnapshotLink>
           <Separator></Separator>
-        </span>}
+        </span>} */}
 
       <IconButton sx={{ ml: 1, marginLeft: '24px' }} onClick={colorMode.toggleColorMode} color="inherit">
         {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
